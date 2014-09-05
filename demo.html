@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 	<head>
-		<title>jQuery Teletype JS</title>
+		<title>jQuery Teletype Plugin</title>
 		<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 		<meta charset="UTF-8" />
 		<style>
 		html, body { padding: 0; margin: 0; font-family: 'Montserrat', helvetica, sans-serif; background: #222; color: #fff; font-size: 40pt; line-height: 1.5; padding: 2%; }
 		h1 { margin: 0; padding: 0; }
-		.teletype-prefix { color: #ff9681; }
-		.teletype-cursor { color: #ff9681; }
+		.teletype-prefix, .teletype-cursor { color: #00bd9c; }
 		</style>
 	</head>
 	<body>
@@ -19,7 +18,7 @@
 		$( function() {
 			$( '.type-text' ).each( function() {
 				var items = $( this ).attr( 'title' ) + ';' + $( this ).text();
-				$( this ).empty().teletype( {
+				$( this ).empty().attr( 'title', '' ).teletype( {
 					text: $.map( items.split( ';' ), $.trim ),
 					typeDelay: 10,
 					backDelay: 20,
