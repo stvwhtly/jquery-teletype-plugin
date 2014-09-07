@@ -1,5 +1,5 @@
 /*
-* @fileOverview Teletype - jQuery Plugin
+* Teletype jQuery Plugin
 * @version 0.1
 *
 * @author Steve Whiteley http://stv.whtly.com
