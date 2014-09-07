@@ -2,7 +2,8 @@
 * Teletype jQuery Plugin
 * @version 0.1
 *
-* @author Steve Whiteley http://stv.whtly.com
+* @author Steve Whiteley
+* @see http://teletype.rocks
 * @see https://github.com/stvwhtly/jquery-teletype-plugin
 *
 * Copyright (c) 2014 Steve Whiteley
