@@ -1,6 +1,6 @@
 /*
 * Teletype jQuery Plugin
-* @version 0.1
+* @version 0.1.1
 *
 * @author Steve Whiteley
 * @see http://teletype.rocks
@@ -104,7 +104,7 @@
 			}
 		};
 		var delay = function( speed ) {
-			return Math.floor( Math.random() * 200 ) + speed;
+			return Math.floor( Math.random() * 200 ) + parseInt( speed );
 		};
 		return this.each( function() {
 			current.string = settings.text[current.index];

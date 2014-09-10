@@ -81,3 +81,8 @@ The following markup is used to output the teletype text.
 ```
     
 This provides the ability to customise the style of the output text in your CSS.
+
+Minification
+------------
+
+The Minified version of this script was provided by UglifyJS 2 - an online version can be found at <http://gpbmike.github.io/refresh-sf/>.
