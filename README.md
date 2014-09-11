@@ -39,6 +39,7 @@ Options
  preserve   | `false` (boolean)                   | Prevent auto delete of the current string and begin outputting the next string.
  prefix     | `""` (string)                       | Begin each string with this prefix value.
  loop       | `0` (int)                           | Number of times to loop through the output strings, for unlimited use `0`.
+ humanise   | `true` (boolean)                    | Add a random delay before each character to represent human interaction.
 
 Deleting characters `~`
 ---
@@ -70,7 +71,7 @@ Line Breaks `\n`
 Line breaks can be added using `\n`, which are converted to `<br />` during output.
 
 Generated Markup
-----------------
+---
 
 The following markup is used to output the teletype text.
 
@@ -83,6 +84,6 @@ The following markup is used to output the teletype text.
 This provides the ability to customise the style of the output text in your CSS.
 
 Minification
-------------
+---
 
 The Minified version of this script was provided by UglifyJS 2 - an online version can be found at <http://gpbmike.github.io/refresh-sf/>.

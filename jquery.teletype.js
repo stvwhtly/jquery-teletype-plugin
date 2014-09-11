@@ -1,6 +1,6 @@
 /*
 * Teletype jQuery Plugin
-* @version 0.1.1
+* @version 0.1.2
 *
 * @author Steve Whiteley
 * @see http://teletype.rocks
@@ -67,7 +67,9 @@
 					letter = '<br />';
 				}
 			}
-			output.html( output.html() + letter );
+			if ( letter != undefined ) {
+				output.html( output.html() + letter );
+			}
 			current.position++;
 			if ( current.position < current.string.length ) {
 				window.setTimeout( type, delay( settings.typeDelay ) );
@@ -104,13 +106,16 @@
 			}
 		};
 		var delay = function( speed ) {
-			return Math.floor( Math.random() * 200 ) + parseInt( speed );
+			var time = parseInt( speed );
+			if ( settings.humanise ) {
+				time += Math.floor( Math.random() * 200 );
+			}
+			return time;
 		};
 		return this.each( function() {
 			current.string = settings.text[current.index];
 			self.addClass( 'teletype' ).empty();
 			output = $( '<span />' ).addClass( 'teletype-text' ).appendTo( self );
-			
 			if ( settings.cursor ) {
 				var cursor = $( '<span />' )
 					.text( settings.cursor )
@@ -132,6 +137,7 @@
 		cursor: '|',
 		preserve: false,
 		prefix: '',
-		loop: 0
+		loop: 0,
+		humanise: true
 	};
 }( jQuery ) );
