@@ -6,12 +6,15 @@
 		<style>
 		html, body { padding: 0; margin: 0; font-family: 'Montserrat', helvetica, sans-serif; background: #222; color: #fff; font-size: 40pt; line-height: 1.5; padding: 2%; }
 		h1 { margin: 0; padding: 0; }
-		.teletype-prefix, .teletype-cursor { color: #00bd9c; }
+		a { color: inherit; }
+		.teletype-prefix, .teletype-cursor, .teletype-text a:hover { color: #00bd9c; }
+		.teletype-text a { text-decoration: none; border-bottom: 3px solid #00bd9c; }
+		.teletype-text span { color: orange; }
 		</style>
 	</head>
 	<body>
 		<h1>jquery.teletype.js</h1>
-		<p class="type-text" title="auti~1 o^1000  type terminal commands.;including new lines,\npauses^2000 , character deletion~20  and other features.; auto delete^2000 , customisable cursor; and loads~5 more...; what will you do?">:)</p>
+		<p class="type-text" title="auti~1 o^1000  type <a href='http://teletype.rocks/'>terminal</a> styl &lt e &gt; $£ <span>stuff</span> and <br /> <span><a href='#'>com</a><strong>mands</strong></span> just <br /> here.;including new lines,\npauses^2000 , character deletion~20  and other features.; auto delete^2000 , customisable cursor; and loads~5 more...; what will you do?">:)</p>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="jquery.teletype.js"></script>
 		<script>
@@ -23,10 +26,11 @@
 					typeDelay: 10,
 					backDelay: 20,
 					cursor: 'â–‹', 
-					delay: 3000,
+					delay: 10000,
 					preserve: false,
 					prefix: '[teletype ~]# ',
-					loop: 0
+					loop: 0,
+					html: true
 				} );
 			} );
 		} );

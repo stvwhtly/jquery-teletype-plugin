@@ -1,5 +1,4 @@
-jQuery Teletype Plugin
-======================
+# jQuery Teletype Plugin
 
 Teletype is a jQuery plugin that types out text, and then optionally deletes it, replicating human interaction.
 
@@ -7,8 +6,7 @@ Additional options provide the ability to preserve the typed text, in a console 
 
 An online demo can be found at <http://teletype.rocks/>.
 
-Installation
----
+## Installation
 
     <script src="jquery.js"></script>
 	<script src="jquery.teletype.js"></script>
@@ -24,8 +22,7 @@ Installation
 	...
 	<div class="type-text"></div>
 
-Options
--------
+## Options
 
    
  Option     | Default     | Description
@@ -40,9 +37,9 @@ Options
  prefix     | `""` (string)                       | Begin each string with this prefix value.
  loop       | `0` (int)                           | Number of times to loop through the output strings, for unlimited use `0`.
  humanise   | `true` (boolean)                    | Add a random delay before each character to represent human interaction.
+ html       | `false` (boolean)                   | Parse HTML in text strings. *(Experimental)*
 
-Deleting characters `~`
----
+## Deleting characters `~`
 
 It is possible to delete a defined number of characters then proceed with the rest of the text output. 
 
@@ -54,8 +51,7 @@ Example, type "auti", delete 1 character and continue to type "o", resulting in 
 auti~1 o^`
 ```
 
-Pause / Delay `^`
----
+## Pause / Delay `^`
 
 Delay typing the next character using `^x ` where x in an integer value of milliseconds to pause.
 
@@ -65,13 +61,11 @@ To pause for 2 seconds after typing the word "pause" before continuing to type:
 pause^2000 more
 ```
 
-Line Breaks `\n`
----
+## Line Breaks `\n`
 
 Line breaks can be added using `\n`, which are converted to `<br />` during output.
 
-Generated Markup
----
+## Generated Markup
 
 The following markup is used to output the teletype text.
 
@@ -83,7 +77,20 @@ The following markup is used to output the teletype text.
     
 This provides the ability to customise the style of the output text in your CSS.
 
-Minification
----
+## Minification
 
 The Minified version of this script was provided by UglifyJS 2 - an online version can be found at <http://gpbmike.github.io/refresh-sf/>.
+
+## Change Log
+
+### 0.2
+
+* Introduced new `html` option, to parse and output html tags.
+
+### 0.1.1
+* Added `humanise` option, defaults to true.
+* Bug fix for empty text strings.
+
+### 0.1
+* The very first release of the plugin, with basic functionality.
+
