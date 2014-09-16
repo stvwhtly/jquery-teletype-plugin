@@ -75,23 +75,29 @@
 				if ( matches && matches[2] ) {
 					current.string = current.string.replace( matches[1], '' );
 					if ( current.tag.length > 0 ) {
-						$( matches[1] ).appendTo( $( current.tag[current.tag.length - 1], output ).last() );
+						$( matches[1] ).appendTo( $( current.tag[current.tag.length - 1], output ).not( '.teletype-cursor' ).last() );
 					} else {
 						$( matches[1] ).appendTo( output );
 					}
-					if ( matches[1].substr( 1, 1 ) == '/' && current.tag[current.tag.length-1] == matches[2] ) {
-						current.tag.pop();
-					} else if ( !matches[4] ) {
-						current.tag[current.tag.length] = matches[2];
+					if ( !matches[2].match( /^(area|br|col|embed|hr|img|input|link|meta|param)$/ ) ) {
+						if ( matches[1].substr( 1, 1 ) == '/' && current.tag[current.tag.length-1] == matches[2] ) {
+							current.tag.pop();
+						} else if ( !matches[4] ) {
+							current.tag[current.tag.length] = matches[2];
+						}
 					}
 					return type();
 				}
 			}
 			if ( letter != undefined ) {
 				if ( current.tag.length > 0 ) {
-					$( current.tag[current.tag.length - 1], output ).last().append( letter );
+					$( current.tag[current.tag.length - 1], output ).not( '.teletype-cursor' ).last().append( letter );
+					$( '.teletype-cursor', self ).detach().appendTo( $( current.tag[current.tag.length - 1], output ).last() );
 				} else if ( settings.html == true ) {
 					output.append( letter );
+					$( '.teletype-cursor', self ).detach().appendTo( self );
+				} else {
+					output.text( output.text() + letter );
 				}
 				current.position++;
 			}
@@ -139,7 +145,7 @@
 						return content.slice( 0, -1 );
 					} );
 				} else if ( settings.html == true ) {
-					output.html( output.html().slice( 0, $('<div />').html( current.string[current.position - 1] ).html().length * -1 ) );
+					output.html( output.html().slice( 0, $( '<div />' ).html( current.string[current.position - 1] ).html().length * -1 ) );
 				} else {
 					output.text( output.text().slice( 0, -1 ) );
 				}
