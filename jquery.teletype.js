@@ -124,6 +124,7 @@
 				if ( settings.html == true ) {
 					var content = output.html();
 					if ( current.tag.length > 0 ) {
+						$( '.teletype-cursor', self ).detach().appendTo( self );
 						var tag = $( current.tag[current.tag.length-1], output ).last();
 						content = tag.html();
 						if ( content == '' ) {
@@ -141,10 +142,12 @@
 					}
 				}
 				if ( current.tag.length > 0 ) {
-					$( current.tag[current.tag.length - 1], output ).last().html( function( index, content ) {
+					$( current.tag[current.tag.length - 1], output ).not( '.teletype-cursor' ).last().html( function( index, content ) {
 						return content.slice( 0, -1 );
 					} );
+					$( '.teletype-cursor', self ).detach().appendTo( $( current.tag[current.tag.length - 1], output ).last() );
 				} else if ( settings.html == true ) {
+					$( '.teletype-cursor', self ).detach().appendTo( self );
 					output.html( output.html().slice( 0, $( '<div />' ).html( current.string[current.position - 1] ).html().length * -1 ) );
 				} else {
 					output.text( output.text().slice( 0, -1 ) );
