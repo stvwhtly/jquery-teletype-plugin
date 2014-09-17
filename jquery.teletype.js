@@ -28,7 +28,7 @@
 			if ( current.index >= settings.text.length ) {
 				current.index = 0;
 				current.loop++;
-				if ( settings.loop != false && ( settings.loop == current.loop ) ) {
+				if ( settings.loop !== false && ( settings.loop == current.loop ) ) {
 					return false;
 				}
 			}
@@ -68,7 +68,7 @@
 					current.position++;
 					letter = '<br />';
 				}
-			} else if ( settings.html == true && letter == '<' ) {
+			} else if ( settings.html === true && letter == '<' ) {
 				var matches = current.string
 					.substr( current.position )
 					.match( /^(<(?:\/)?(\w+)\s?(.*?)(\/)?>).*(?=<\/\2>)?/i );
@@ -93,7 +93,7 @@
 				if ( current.tag.length > 0 ) {
 					$( current.tag[current.tag.length - 1], output ).not( '.teletype-cursor' ).last().append( letter );
 					$( '.teletype-cursor', self ).detach().appendTo( $( current.tag[current.tag.length - 1], output ).last() );
-				} else if ( settings.html == true ) {
+				} else if ( settings.html === true ) {
 					output.append( letter );
 					$( '.teletype-cursor', self ).detach().appendTo( self );
 				} else {
@@ -103,7 +103,7 @@
 			}
 			if ( current.position < current.string.length ) {
 				window.setTimeout( type, delay( settings.typeDelay ) );
-			} else if ( settings.preserve == false ) {
+			} else if ( settings.preserve === false ) {
 				window.setTimeout( function() {
 					window.setTimeout( backspace, delay( settings.backDelay ) );
 				}, settings.delay );
@@ -121,7 +121,7 @@
 				stop = 0;
 			}
 			if ( current.position > stop ) {
-				if ( settings.html == true ) {
+				if ( settings.html === true ) {
 					var content = output.html();
 					if ( current.tag.length > 0 ) {
 						$( '.teletype-cursor', self ).detach().appendTo( self );
@@ -146,7 +146,7 @@
 						return content.slice( 0, -1 );
 					} );
 					$( '.teletype-cursor', self ).detach().appendTo( $( current.tag[current.tag.length - 1], output ).last() );
-				} else if ( settings.html == true ) {
+				} else if ( settings.html === true ) {
 					$( '.teletype-cursor', self ).detach().appendTo( self );
 					output.html( output.html().slice( 0, $( '<div />' ).html( current.string[current.position - 1] ).html().length * -1 ) );
 				} else {
@@ -158,7 +158,7 @@
 				}, delay( settings.backDelay ) );
 			} else {
 				if ( stop == 0 ) {
-					if ( next() == false ) {
+					if ( next() === false ) {
 						return;
 					}
 				}
