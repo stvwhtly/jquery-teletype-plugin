@@ -1,6 +1,6 @@
 /*
 * Teletype jQuery Plugin
-* @version 0.2
+* @version 0.2-alpha
 *
 * @author Steve Whiteley
 * @see http://teletype.rocks
@@ -68,34 +68,45 @@
 					current.position++;
 					letter = '<br />';
 				}
-			} else if ( settings.html === true && letter == '<' ) {
-				var matches = current.string
-					.substr( current.position )
-					.match( /^(<(?:\/)?(\w+)\s?(.*?)(\/)?>).*(?=<\/\2>)?/i );
-				if ( matches && matches[2] ) {
-					current.string = current.string.replace( matches[1], '' );
-					if ( current.tag.length > 0 ) {
-						$( matches[1] ).appendTo( $( current.tag[current.tag.length - 1], output ).not( '.teletype-cursor' ).last() );
-					} else {
-						$( matches[1] ).appendTo( output );
-					}
-					if ( !matches[2].match( /^(area|br|col|embed|hr|img|input|link|meta|param)$/ ) ) {
-						if ( matches[1].substr( 1, 1 ) == '/' && current.tag[current.tag.length-1] == matches[2] ) {
-							current.tag.pop();
-						} else if ( !matches[4] ) {
-							current.tag[current.tag.length] = matches[2];
+			} else if ( settings.html === true ) {
+				if ( letter == '<' ) {
+					var matches = current.string
+						.substr( current.position )
+						.match( /^(<(?:\/)?(\w+)\s?(.*?)(\/)?>).*(?=<\/\2>)?/i );
+					if ( matches && matches[2] ) {
+						current.string = current.string.replace( matches[1], '' );
+						if ( current.tag.length > 0 ) {
+							$( matches[1] ).appendTo( $( current.tag[current.tag.length - 1], output ).not( '.teletype-cursor' ).last() );
+						} else {
+							$( matches[1] ).appendTo( output );
 						}
+						if ( !matches[2].match( /^(area|br|col|embed|hr|img|input|link|meta|param)$/ ) ) {
+							if ( matches[1].substr( 1, 1 ) == '/' && current.tag[current.tag.length-1] == matches[2] ) {
+								current.tag.pop();
+							} else if ( !matches[4] ) {
+								current.tag[current.tag.length] = matches[2];
+							}
+						}
+						return type();
 					}
-					return type();
+				} else if ( letter == '&' ) {
+					var matches = current.string
+						.substr( current.position )
+						.match( /^(&\w+;)/i );
+					if ( matches ) {
+						letter = matches[1];
+						current.string = current.string.replace( matches[1], '' );
+						current.position = current.position - 2;
+					}
 				}
 			}
 			if ( letter != undefined ) {
 				if ( current.tag.length > 0 ) {
+					cursor( $( current.tag[current.tag.length - 1], output ) );
 					$( current.tag[current.tag.length - 1], output ).not( '.teletype-cursor' ).last().append( letter );
-					$( '.teletype-cursor', self ).detach().appendTo( $( current.tag[current.tag.length - 1], output ).last() );
 				} else if ( settings.html === true ) {
 					output.append( letter );
-					$( '.teletype-cursor', self ).detach().appendTo( self );
+					cursor( self );
 				} else {
 					output.text( output.text() + letter );
 				}
@@ -121,10 +132,11 @@
 				stop = 0;
 			}
 			if ( current.position > stop ) {
+				var chars = -1;
 				if ( settings.html === true ) {
-					var content = output.html();
+					var content = $( '<div />' ).html( output.html() ).html();
 					if ( current.tag.length > 0 ) {
-						$( '.teletype-cursor', self ).detach().appendTo( self );
+						cursor( self );
 						var tag = $( current.tag[current.tag.length-1], output ).last();
 						content = tag.html();
 						if ( content == '' ) {
@@ -139,18 +151,27 @@
 						if ( matches && matches[1] ) {
 							current.tag[current.tag.length] = matches[2];
 						}
+					} else if ( content.substr( content.length - 1 ) == ';' ) {
+						var matches = content.match( /(&\w+;)$/i );
+						console.log( matches );
+						if ( matches && matches[1] ) {
+							chars = matches[1].length * -1;
+						}
 					}
 				}
 				if ( current.tag.length > 0 ) {
-					$( current.tag[current.tag.length - 1], output ).not( '.teletype-cursor' ).last().html( function( index, content ) {
-						return content.slice( 0, -1 );
-					} );
-					$( '.teletype-cursor', self ).detach().appendTo( $( current.tag[current.tag.length - 1], output ).last() );
-				} else if ( settings.html === true ) {
-					$( '.teletype-cursor', self ).detach().appendTo( self );
-					output.html( output.html().slice( 0, $( '<div />' ).html( current.string[current.position - 1] ).html().length * -1 ) );
+					$( current.tag[current.tag.length - 1], output )
+						.not( '.teletype-cursor' )
+						.last()
+						.html( function( index, content ) {
+							return content.slice( 0, chars );
+						} );
+					cursor( $( current.tag[current.tag.length - 1], output ) );
 				} else {
-					output.text( output.text().slice( 0, -1 ) );
+					if ( settings.html === true ) {
+						cursor( self );
+					}
+					output.html( output.html().slice( 0, chars ) );
 				}
 				current.position--;
 				window.setTimeout( function() {
@@ -165,6 +186,11 @@
 				window.setTimeout( type, delay( settings.typeDelay ) );
 			}
 		};
+		var cursor = function( parent ) {
+			$( '.teletype-cursor', self ).detach().appendTo(
+				parent.not( '.teletype-cursor' ).last()
+			);
+		}
 		var delay = function( speed ) {
 			var time = parseInt( speed );
 			if ( settings.humanise ) {
