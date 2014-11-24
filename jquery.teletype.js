@@ -78,7 +78,7 @@
 					window.setTimeout( backspace, delay( settings.backDelay ) );
 				}, settings.delay );
 			} else {
-				output.html( output.html() + '<br />' + '<span class="teletype-prefix">' + settings.prefix + '</span>' );
+				output.html( output.html() + '<span class="teletype-prefix">' + settings.prefix + '</span>' );
 				if ( next() ) {
 					window.setTimeout( function() {
 						window.setTimeout( type, delay( settings.typeDelay ) );
