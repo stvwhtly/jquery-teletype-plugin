@@ -1,6 +1,6 @@
 /*
 * Teletype jQuery Plugin
-* @version 0.1.2
+* @version 0.1.3
 *
 * @author Steve Whiteley
 * @see http://teletype.rocks
@@ -26,17 +26,20 @@
 			if ( current.index >= settings.text.length ) {
 				current.index = 0;
 				current.loop++;
-				if ( settings.loop != false && ( settings.loop == current.loop ) ) {
+				if ( settings.loop !== false && ( settings.loop == current.loop ) ) {
 					return false;
 				}
 			}
 			current.position = 0;
 			current.string = settings.text[current.index];
+			if (typeof(settings.callbackNext) == 'function') {
+                settings.callbackNext(current.string);
+            }
 			return true;
 		};
 		var type = function() {
-			if ( settings.prefix && current.position == 0 ) {
-				if ( current.loop == 0 && current.index == 0 ) {
+			if ( settings.prefix && current.position === 0 ) {
+				if ( current.loop === 0 && current.index === 0 ) {
 					$( '<span />' ).addClass( 'teletype-prefix' ).html( settings.prefix ).prependTo( self );
 				}
 			}
@@ -67,13 +70,13 @@
 					letter = '<br />';
 				}
 			}
-			if ( letter != undefined ) {
+			if ( letter !== undefined ) {
 				output.html( output.html() + letter );
 			}
 			current.position++;
 			if ( current.position < current.string.length ) {
 				window.setTimeout( type, delay( settings.typeDelay ) );
-			} else if ( settings.preserve == false ) {
+			} else if ( settings.preserve === false ) {
 				window.setTimeout( function() {
 					window.setTimeout( backspace, delay( settings.backDelay ) );
 				}, settings.delay );
@@ -91,14 +94,14 @@
 				stop = 0;
 			}
 			if ( current.position > stop ) {
-				output.html( output.html().slice( 0, -1 ) );
+				output.html( output.text().slice( 0, -1 ) );
 				window.setTimeout( function() {
 					backspace( stop );
 				}, delay( settings.backDelay ) );
 				current.position--;
 			} else {
-				if ( stop == 0 ) {
-					if ( next() == false ) {
+				if ( stop === 0 ) {
+					if ( next() === false ) {
 						return;
 					}
 				}
@@ -138,6 +141,7 @@
 		preserve: false,
 		prefix: '',
 		loop: 0,
-		humanise: true
+		humanise: true,
+        callbackNext: ''
 	};
 }( jQuery ) );
