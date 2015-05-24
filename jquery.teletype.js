@@ -1,6 +1,6 @@
 /*
 * Teletype jQuery Plugin
-* @version 0.1.3
+* @version 0.1.4
 *
 * @author Steve Whiteley
 * @see http://teletype.rocks
@@ -13,7 +13,8 @@
 ( function ( $ ) {
 	$.fn.teletype = function( options ) {
 		var settings = $.extend( {}, $.fn.teletype.defaults, options );
-		var self = $( this ),
+		var object = this,
+			self = $( this ),
 			output = null,
 			current = { 
 				string: '',
@@ -33,7 +34,7 @@
 			current.position = 0;
 			current.string = settings.text[current.index];
 			if (typeof(settings.callbackNext) == 'function') {
-                settings.callbackLNext(current.string);
+                settings.callbackNext(current, object);
             }
 			return true;
 		};
@@ -88,6 +89,9 @@
 					}, settings.delay );
 				}
 			}
+			if (typeof(settings.callbackType) == 'function') {
+                settings.callbackType(letter, current, object);
+            }
 		};
 		var backspace = function( stop ) {
 			if ( !stop ) {
@@ -115,15 +119,18 @@
 			}
 			return time;
 		};
+		this.setCursor = function( cursor ) {
+			$('.teletype-cursor', self).text( cursor );
+		};
 		return this.each( function() {
 			current.string = settings.text[current.index];
 			self.addClass( 'teletype' ).empty();
 			output = $( '<span />' ).addClass( 'teletype-text' ).appendTo( self );
 			if ( settings.cursor ) {
 				var cursor = $( '<span />' )
-					.text( settings.cursor )
 					.addClass( 'teletype-cursor' )
 					.appendTo( self );
+				object.setCursor( settings.cursor );
 				setInterval ( function() {
 					cursor.animate( { opacity: 0 } ).animate( { opacity: 1 } );
 				}, settings.blinkSpeed );
@@ -142,6 +149,7 @@
 		prefix: '',
 		loop: 0,
 		humanise: true,
-        callbackNext: null
+        callbackNext: null,
+        callbackType: null
 	};
 }( jQuery ) );

@@ -40,7 +40,8 @@ Options
  prefix       | `""` (string)                       | Begin each string with this prefix value.
  loop         | `0` (int)                           | Number of times to loop through the output strings, for unlimited use `0`.
  humanise     | `true` (boolean)                    | Add a random delay before each character to represent human interaction.
- callbackNext | `null` (function)                   | Callback function that is called every new letter
+ callbackNext | `null` (function)                   | Callback function called every text item.
+ callbackType | `null` (function)                   | Callback function called every 'letter'.
 
 Deleting characters `~`
 ---
