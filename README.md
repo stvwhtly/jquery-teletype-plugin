@@ -5,7 +5,7 @@ Teletype is a jQuery plugin that types out text, and then optionally deletes it,
 
 Additional options provide the ability to preserve the typed text, in a console / terminal format, pause during typing and delete characters.
 
-An online demo can be found at <http://teletype.rocks/>.
+An online demo can be found at <http://teletype.rocks/index.html>.
 
 Installation
 ---
@@ -28,8 +28,8 @@ Options
 -------
 
    
- Option       | Default     | Description
---------------|-------------|------------
+ Option       | Default                             | Description
+--------------|-------------------------------------|------------
  text         | `['one','two','three']` (array)     | List of strings to output.     
  typeDelay    | `100` (integer)                     | Minimum delay, in ms, between typing characters.    
  backDelay    | `50` (integer)                      | Minimum delay, in ms, between deleting characters.
