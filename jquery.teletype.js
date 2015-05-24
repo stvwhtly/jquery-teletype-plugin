@@ -33,7 +33,7 @@
 			current.position = 0;
 			current.string = settings.text[current.index];
 			if (typeof(settings.callbackNext) == 'function') {
-                settings.callbackNext(current.string);
+                settings.callbackLNext(current.string);
             }
 			return true;
 		};
@@ -94,7 +94,7 @@
 				stop = 0;
 			}
 			if ( current.position > stop ) {
-				output.html( output.text().slice( 0, -1 ) );
+				output.html( output.html().slice( 0, -1 ) );
 				window.setTimeout( function() {
 					backspace( stop );
 				}, delay( settings.backDelay ) );
@@ -142,6 +142,6 @@
 		prefix: '',
 		loop: 0,
 		humanise: true,
-        callbackNext: ''
+        callbackNext: null
 	};
 }( jQuery ) );
