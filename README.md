@@ -27,7 +27,6 @@ Installation
 Options
 -------
 
-   
  Option       | Default                             | Description
 --------------|-------------------------------------|------------
  text         | `['one','two','three']` (array)     | List of strings to output.     
@@ -42,6 +41,15 @@ Options
  humanise     | `true` (boolean)                    | Add a random delay before each character to represent human interaction.
  callbackNext | `null` (function)                   | Callback function called every text item. See `Callback functions` below.
  callbackType | `null` (function)                   | Callback function called every 'letter'. See `Callback functions` below.
+
+Methods
+-------
+
+**teletype.setCursor(string cursor)**
+
+Change the cursor value. Can be used at any time although particularly useful
+when combined with callback functions.
+
 
 Deleting characters `~`
 ---
