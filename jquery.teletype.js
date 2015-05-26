@@ -33,9 +33,9 @@
 			}
 			current.position = 0;
 			current.string = settings.text[current.index];
-			if (typeof(settings.callbackNext) == 'function') {
-                settings.callbackNext(current, object);
-            }
+			if ( typeof( settings.callbackNext ) == 'function' ) {
+				settings.callbackNext( current, object );
+			}
 			return true;
 		};
 		var type = function() {
@@ -66,7 +66,7 @@
 				}
 			} else if ( letter == '\\' ) {
 				var nextChar = current.string.substr( current.position + 1, 1 );
-				if ( nextChar  == 'n' ) {
+				if ( nextChar == 'n' ) {
 					current.position++;
 					letter = '<br />';
 				}
@@ -89,9 +89,9 @@
 					}, settings.delay );
 				}
 			}
-			if (typeof(settings.callbackType) == 'function') {
-                settings.callbackType(letter, current, object);
-            }
+			if ( typeof( settings.callbackType ) == 'function' ) {
+				settings.callbackType( letter, current, object );
+			}
 		};
 		var backspace = function( stop ) {
 			if ( !stop ) {
@@ -149,7 +149,7 @@
 		prefix: '',
 		loop: 0,
 		humanise: true,
-        callbackNext: null,
-        callbackType: null
+		callbackNext: null,
+		callbackType: null
 	};
 }( jQuery ) );
