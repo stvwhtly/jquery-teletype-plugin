@@ -5,7 +5,7 @@ Teletype is a jQuery plugin that types out text, and then optionally deletes it,
 
 Additional options provide the ability to preserve the typed text, in a console / terminal format, pause during typing and delete characters.
 
-An online demo can be found at <http://teletype.rocks/index.html>.
+An online demo can be found at <http://teletype.rocks>.
 
 Installation
 ---
@@ -40,8 +40,8 @@ Options
  prefix       | `""` (string)                       | Begin each string with this prefix value.
  loop         | `0` (int)                           | Number of times to loop through the output strings, for unlimited use `0`.
  humanise     | `true` (boolean)                    | Add a random delay before each character to represent human interaction.
- callbackNext | `null` (function)                   | Callback function called every text item.
- callbackType | `null` (function)                   | Callback function called every 'letter'.
+ callbackNext | `null` (function)                   | Callback function called every text item. See `Callback functions` below.
+ callbackType | `null` (function)                   | Callback function called every 'letter'. See `Callback functions` below.
 
 Deleting characters `~`
 ---
@@ -85,7 +85,61 @@ The following markup is used to output the teletype text.
     
 This provides the ability to customise the style of the output text in your CSS.
 
+Callback functions
+---
+
+There are two callback functions available, `callbackNext` and `callbackType`.
+
+**Using the `callbackNext` callback**
+
+Called every time a new text item begins. Two parameters are passed back here,
+`current` and `teletype`.
+
+The `current` object holds details of the current text and position pointers.
+
+```
+current = { 
+	string: '', 	// The full text line being written.
+	index: 0, 		// Array index of the text array.
+	position: 0, 	// Character index position within the current text string.
+	loop: 0 		// Current loop number, increments if settings.loop is enabled.
+};
+```
+
+The second parameter `teletype` returns the teletype object itself, allowing
+you to easily interact with the teletyper.
+
+Example, change the cursor when moving to the 3rd text item (index 2).
+
+```
+callbackNext: function( current, teletype ) {
+	if ( current.index == 2 ) {
+		teletype.setCursor( '▋' );
+	}
+}
+```
+
+**Using the `callbackType` callback**
+
+Callback function called every 'letter', when either typing or deleting output.
+
+There are three parameters used here, `letter`, `current` and `teletype`.
+
+The value of `letter` is the text that will be written, usually a single
+character but can be HTML markup for special characters.
+
+The other two parameters are the same as those used by `callbackNext` (see above).
+
+```
+callbackType: function( letter, current, teletype ) {
+	if ( current.index == 2 && current.position == 13 ) {
+		teletype.setCursor( '_' );
+	}
+}
+```
+
 Minification
 ---
 
 The Minified version of this script was provided by UglifyJS 2 - an online version can be found at <http://gpbmike.github.io/refresh-sf/>.
+
