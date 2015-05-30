@@ -1,6 +1,6 @@
 /*
 * Teletype jQuery Plugin
-* @version 0.1.4
+* @version 0.1.5
 *
 * @author Steve Whiteley
 * @see http://teletype.rocks
@@ -45,12 +45,16 @@
 				}
 			}
 			var letters = current.string.split( '' ),
-				letter = letters[current.position];
+				letter = letters[current.position],
+				start = current.position + 1;
 			if ( letter == '^' || letter == '~' ) {
-				var end = current.string.substr( current.position + 1 ).indexOf( ' ' );
-				var value = current.string.substr( current.position + 1, end );
+				var end = current.string.substr( start ).search( /[^0-9]/ );
+				if ( end == -1 ) {
+					end = current.string.length;
+				}
+				var value = current.string.substr( start, end );
 				if ( $.isNumeric( value ) ) {
-					current.string = current.string.replace( letter + value + ' ', '' );
+					current.string = current.string.replace( letter + value, '' );
 					if ( letter == '^' ) {
 						window.setTimeout( function() {
 							window.setTimeout( type, delay( settings.typeDelay ) );
@@ -65,7 +69,7 @@
 					return;
 				}
 			} else if ( letter == '\\' ) {
-				var nextChar = current.string.substr( current.position + 1, 1 );
+				var nextChar = current.string.substr( start, 1 );
 				if ( nextChar == 'n' ) {
 					current.position++;
 					letter = '<br />';

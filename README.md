@@ -56,18 +56,18 @@ Deleting characters `~`
 
 It is possible to delete a defined number of characters then proceed with the rest of the text output. 
 
-Use `~x ` within the text string, where x is an integer value defining the characters to backspace, followed by a space.
+Use `~x` within the text string, where x is an integer value defining the characters to backspace.
 
 Example, type "auti", delete 1 character and continue to type "o", resulting in the word "auto":
 
 ```
-auti~1 o^`
+auti~1o^`
 ```
 
 Pause / Delay `^`
 ---
 
-Delay typing the next character using `^x ` where x in an integer value of milliseconds to pause.
+Delay typing the next character using `^x` where x in an integer value of milliseconds to pause.
 
 To pause for 2 seconds after typing the word "pause" before continuing to type: 
 
