@@ -146,6 +146,18 @@ callbackType: function( letter, current, teletype ) {
 }
 ```
 
+**Using the `callbackFinished` callback**
+
+Callback function called immediately once the teletype process is entirely finished.
+
+There are no parameters.
+
+```
+callbackFinished: function() {
+	alert('Nothing left to type!');
+}
+```
+
 Minification
 ---
 

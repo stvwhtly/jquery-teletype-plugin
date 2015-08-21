@@ -91,6 +91,10 @@
 					window.setTimeout( function() {
 						window.setTimeout( type, delay( settings.typeDelay ) );
 					}, settings.delay );
+				} else {
+					if ( typeof( settings.callbackFinished ) == 'function' ) {
+						settings.callbackFinished();
+					}
 				}
 			}
 			if ( typeof( settings.callbackType ) == 'function' ) {
@@ -154,6 +158,7 @@
 		loop: 0,
 		humanise: true,
 		callbackNext: null,
-		callbackType: null
+		callbackType: null,
+		callbackFinished: null
 	};
 }( jQuery ) );
