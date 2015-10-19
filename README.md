@@ -27,20 +27,21 @@ Installation
 Options
 -------
 
- Option       | Default                             | Description
---------------|-------------------------------------|------------
- text         | `['one','two','three']` (array)     | List of strings to output.     
- typeDelay    | `100` (integer)                     | Minimum delay, in ms, between typing characters.    
- backDelay    | `50` (integer)                      | Minimum delay, in ms, between deleting characters.
- blinkSpeed   | `1000` (integer)                    | Interval, in ms, that the cursor will flash.
- cursor       | <code>"&#124;"</code> (string)      | Character used to represent the cursor.
- delay        | `2000` (int)                        | Time in ms to pause before deleting the current text.
- preserve     | `false` (boolean)                   | Prevent auto delete of the current string and begin outputting the next string.
- prefix       | `""` (string)                       | Begin each string with this prefix value.
- loop         | `0` (int)                           | Number of times to loop through the output strings, for unlimited use `0`.
- humanise     | `true` (boolean)                    | Add a random delay before each character to represent human interaction.
- callbackNext | `null` (function)                   | Callback function called every text item. See `Callback functions` below.
- callbackType | `null` (function)                   | Callback function called every 'letter'. See `Callback functions` below.
+ Option               | Default                             | Description
+----------------------|-------------------------------------|------------
+ text                 | `['one','two','three']` (array)     | List of strings to output.     
+ typeDelay            | `100` (integer)                     | Minimum delay, in ms, between typing characters.    
+ backDelay            | `50` (integer)                      | Minimum delay, in ms, between deleting characters.
+ blinkSpeed           | `1000` (integer)                    | Interval, in ms, that the cursor will flash.
+ cursor               | <code>"&#124;"</code> (string)      | Character used to represent the cursor.
+ delay                | `2000` (int)                        | Time in ms to pause before deleting the current text.
+ preserve             | `false` (boolean)                   | Prevent auto delete of the current string and begin outputting the next string.
+ prefix               | `""` (string)                       | Begin each string with this prefix value.
+ loop                 | `0` (int)                           | Number of times to loop through the output strings, for unlimited use `0`.
+ humanise             | `true` (boolean)                    | Add a random delay before each character to represent human interaction.
+ callbackNext         | `null` (function)                   | Callback function called every text item. See `Callback functions` below.
+ callbackType         | `null` (function)                   | Callback function called every 'letter'. See `Callback functions` below.
+ callbackFinished     | `null` (function)                   | Callback function called once everything is finished. See `Callback functions` below.
 
 Methods
 -------
@@ -150,11 +151,11 @@ callbackType: function( letter, current, teletype ) {
 
 Callback function called immediately once the teletype process is entirely finished.
 
-There are no parameters.
+The single parameter `teletype` returns the teletype object itself.
 
 ```
-callbackFinished: function() {
-	alert('Nothing left to type!');
+callbackFinished: function( teletype ) {
+	alert( 'Nothing left to type!' );
 }
 ```
 
@@ -162,4 +163,3 @@ Minification
 ---
 
 The Minified version of this script was provided by UglifyJS 2 - an online version can be found at <http://gpbmike.github.io/refresh-sf/>.
-
