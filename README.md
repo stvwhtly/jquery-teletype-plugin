@@ -9,6 +9,12 @@ An online demo can be found at <http://teletype.rocks>.
 
 Installation
 ---
+Via [bower](https://github.com/stvwhtly/jquery-teletype-plugin/blob/master/bower.json):
+```bash
+bower install jquery.teletype
+```
+
+Manual:
 
     <script src="jquery.js"></script>
 	<script src="jquery.teletype.js"></script>
