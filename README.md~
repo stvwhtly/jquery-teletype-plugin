@@ -45,7 +45,6 @@ Options
  prefix               | `""` (string)                       | Begin each string with this prefix value.
  loop                 | `0` (int)                           | Number of times to loop through the output strings, for unlimited use `0`.
  humanise             | `true` (boolean)                    | Add a random delay before each character to represent human interaction.
- smoothBlink          | `true` (boolean)                    | Set the curser to a solid blink or smooth blink effect.                | 
  callbackNext         | `null` (function)                   | Callback function called every text item. See `Callback functions` below.
  callbackType         | `null` (function)                   | Callback function called every 'letter'. See `Callback functions` below.
  callbackFinished     | `null` (function)                   | Callback function called once everything is finished. See `Callback functions` below.
