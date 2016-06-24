@@ -141,7 +141,11 @@
 					.appendTo( self );
 				object.setCursor( settings.cursor );
 				setInterval ( function() {
-					cursor.animate( { opacity: 0 } ).animate( { opacity: 1 } );
+                  if ( settings.smoothBlink ) {
+				    cursor.animate( { opacity: 0 } ).animate( { opacity: 1 } );
+			      } else {
+                      cursor.delay(500).fadeTo(0,0).delay(500).fadeTo(0,1);
+                  }
 				}, settings.blinkSpeed );
 			}
 			type();
@@ -158,6 +162,7 @@
 		prefix: '',
 		loop: 0,
 		humanise: true,
+		smoothBlink: true,
 		callbackNext: null,
 		callbackType: null,
 		callbackFinished: null
